@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cadastro.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="textBox">
+                <form id="form">
+                    <fieldset>
+                        <label for="nome">Nome:</label>
+                        <input type="text" name="nome" id="nome">
+                    </fieldset>
+                    <fieldset>
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email">
+                    </fieldset>
+                    <fieldset>
+                        <div>
+                            <label for="senha">Senha:</label>
+                            <input type="password" name="senha" id="senha">
+                        </div>
+                    
+                        <div>
+                            <label for="senha2">Confirmar Senha:</label>
+                            <input type="password" name="senha2" id="senha2">
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div>
+                            <label for="cpf">CPF:</label>
+                            <input type="text" name="cpf" id="cpf">
+                        </div>
+                       
+                        <div>
+                            <label for="tel">Telefone:</label>
+                            <input type="text" name="tel" id="tel">
+                        </div>
+                      
+                    </fieldset>
+                    <button type="button" form="form" onclick="cadastro()">Entrar</button>
+                </form>
+                <p>Não tem uma conta? <a href="#"> Cadastre-se </a></p>
+            </div>
+        </div>
+    </main>
+    <script src="scripts/alt.js"></script>
+</body>
+</html>
