@@ -5,9 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h1>dfviedhfriehdiefh</h1>
+    <header>
+        <div class="content">
+            <h1>teste</h1>
+            <p id="nome">fbrg</p>
+        </div>
+    </header>
+    <div class="container">
+        <div class="postagem_input">
+            <h1>Postagem Inicial</h1>
+            <form id="form">
+                <textarea name="textbox" id="textbox" minlength="1" maxlength="2000" placeholder="O que você está pensando ?"></textarea>
+                    <input type="file">
+            </form>
+            <button type="button" form="form" onclick="postagem();">Postar</button>
+        </div>
+        <div class="feed" id="feed">
+
+        </div>
+    </div>
+
     <script src="scripts/index.js"></script>
 </body>
 </html>

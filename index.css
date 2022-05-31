@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+*{
+    font-family: 'Nunito', sans-serif;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+body{
+    background-color: #B4D1EC;
+ 
+}
+
+header {
+   width: 100vw;
+   height: 60px; 
+   background-color: #98B1D6; 
+}
+
+header .content{
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+header .content h1{
+    font-size: 1.5em;
+    
+}
+
+.postagem_input form textarea{
+    width: 900px;
+    height: 50px;
+    border-radius: 5px;
+    resize: none;
+    box-shadow: none;
+    display: block;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.postagem_input h1{
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.postagem_input button{
+    width: 100px;
+    height: 40px;
+    font-size: 1em;
+    background: rgba(233, 91, 149, 1);
+    border-radius: 6px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+     color: white;
+     transition: 1s;
+}
+
+.postagem_input button:hover{
+    cursor: pointer;
+    transform: scale(0.9);
+}
+
+.post{
+    width: 900px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.post .header{
+    display: flex;
+    padding-top: 10px;
+}
+
+.post .header .dados{
+   padding-left: 15px;
+   
+}
+
+.post .header .dados p:nth-of-type(1){
+    font-size: 1.2em;
+}
+
+.post .header .dados p:nth-of-type(2){
+   font-size: 0.6em;
+}
+
+.post .header .dados p:nth-of-type(3){
+    font-size: 0.6em;
+ }
+ 
+
+.post .header img{
+    width: 60px;
+    height: 60px;
+    border-radius: 80px;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+}
+
+.post .conteudo p{
+    padding-top: 20px;
+}
+
+.feed{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+
+
+
+
+
+
+
+
