@@ -14,38 +14,38 @@
                 <form id="form">
                     <fieldset>
                         <label for="nome">Nome:</label>
-                        <input type="text" name="nome" id="nome">
+                        <input type="text" name="nome" id="nome" minlength="3" maxlength="50" placeholder="Digite seu nome" required>
                     </fieldset>
                     <fieldset>
                         <label for="email">Email:</label>
-                        <input type="email" name="email" id="email">
+                        <input type="email" name="email" id="email"  maxlength="30" placeholder="Digite seu email" required>
                     </fieldset>
                     <fieldset>
                         <div>
                             <label for="senha">Senha:</label>
-                            <input type="password" name="senha" id="senha">
+                            <input type="password" name="senha" id="senha" minlength="6" maxlength="20" title="Teste" placeholder="Digite sua senha"required>
                         </div>
                     
                         <div>
                             <label for="senha2">Confirmar Senha:</label>
-                            <input type="password" name="senha2" id="senha2">
+                            <input type="password" name="senha2" id="senha2" placeholder="Confirme sua senha">
                         </div>
                     </fieldset>
                     <fieldset>
                         <div>
                             <label for="cpf">CPF:</label>
-                            <input type="text" name="cpf" id="cpf">
+                            <input type="text" name="cpf" id="cpf" pattern="(\d{3}\.?\d{3}\.?\d{3}-?\d{2})" required>
                         </div>
                        
                         <div>
                             <label for="tel">Telefone:</label>
-                            <input type="text" name="tel" id="tel">
+                            <input type="tel" id="tel" name="tel" placeholder="(xx) xxxxx-xxxx"  pattern="\([0-9]{2}\)[\s][0-9]{5}-[0-9]{4}"></label>
                         </div>
                       
                     </fieldset>
-                    <button type="button" form="form" onclick="cadastro()">Entrar</button>
+                    <button type="submit" form="form" onclick="cadastro()">Cadastrar</button>
                 </form>
-                <p>Não tem uma conta? <a href="#"> Cadastre-se </a></p>
+                <p>Já tem uma conta? <a href="login.html"> Entrar </a></p>
             </div>
         </div>
     </main>

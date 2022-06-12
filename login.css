@@ -12,6 +12,7 @@ body{
     height: 100%;
     background-size: cover;
 }
+
 .textBox{
     background-color: rgba(137, 177, 214, 1);
     width: 400px;
@@ -70,6 +71,9 @@ a{
     color: black;
 }
 
+.link:hover{
+    color: rgba(233, 91, 149, 1);
+}
 
 
 

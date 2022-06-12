@@ -1,50 +1,177 @@
+if (sessionStorage.getItem("token") == null) {
+    alert('Você precisa estar autenticado na Aplicação.');
+  }
 
-if (sessionStorage.getItem('token') == null) {
-    console.log("Você não está autenticado");
-    window.location.href = "login.html";
-}
-
-let contaAutent = JSON.parse(sessionStorage.getItem("usuarioAutenticado"));
-const nome = document.getElementById('nome');
-nome.innerHTML = `Olá ${contaAutent.nome}`;
-
-function postagem() {
-    let textBox = document.getElementById('textbox');
-    let postagem = JSON.parse(localStorage.getItem('postagens')) || [];
-
-    if (textbox.value.match(/^\s+$/) !== null || textbox.value <= 0) {
-        console.log("Você deve postar algo");
-    } else {
-        let postagens = { content: textBox.value, author: contaAutent.nome, date: new Date().toLocaleString() }
-        postagem.push(postagens)
-        localStorage.setItem("postagens", JSON.stringify(postagem))
+  getPostData();
+  
+  let usuarioAutenticado = JSON.parse(sessionStorage.getItem("usuarioAutenticado"));
+  const nomeUsuario = document.getElementById("nomeUsuario");
+  nomeUsuario.innerHTML = `Oi ${usuarioAutenticado.nome}`;
+  
+  
+  function postagem() {
+    let textoPostagem = document.getElementById("textbox");
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+    let file = document.getElementById("arquivo").files[0];
+    if (textoPostagem.value <= 0) {
+        alert('Você precisa digitar algo');
+    } else if (file) {
+      let reader = new FileReader(); 
+      reader.readAsDataURL(file); 
+      reader.onload = function () {
+        let arquivoConvertido = reader.result;
+        let post = {
+          conteudo: textoPostagem.value,
+          arquivo: arquivoConvertido,
+          data: new Date(),
+          usuario: usuarioAutenticado.nome,
+        };
+        posts.push(post);
+        localStorage.setItem("postagens", JSON.stringify(posts));
         document.location.reload();
+      };
+    } else {
+      let post = {
+        id: posts.length + 1,
+        conteudo: textoPostagem.value,
+        data: new Date(),
+        usuario: usuarioAutenticado.nome,
+      };
+      posts.push(post);
+      localStorage.setItem("postagens", JSON.stringify(posts));
+      document.location.reload();
     }
-}
-
-function receberPostagem() {
-    let postagem = JSON.parse(localStorage.getItem('postagens')) || [];
-    let feed = document.getElementById('feed');
-    postagem.map((post) => {
-        feed.innerHTML += `           
+  }
+  
+  function getPostData() {
+    let posts = JSON.parse(localStorage.getItem("postagens")) || [];
+    let feed = document.getElementById("feed");
+    posts.map((postagem) => {
+      if (postagem.file == null) {
+        feed.innerHTML += `  
         <div class="post">
+        <div class="header">
+            <img src="imagens/fotoPerfil.jpeg">
+            <div class="dados">
+                <p>${postagem.usuario}</p>
+                <p>São Paulo</p>
+                <p>${postagem.data}</p>
+            </div>
+        </div>
+        <div class="conteudo">
+            <p>${postagem.conteudo}</p>
+            <img src="">
+        </div>
+    </div>`;
+      } else if (postagem.file.includes("data:image/png;base64")) {
+        feed.innerHTML += `  
+        <div class="post">
+        <div class="header">
+            <img src="imagens/fotoPerfil.jpeg">
+            <div class="dados">
+                <p>${postagem.usuario}</p>
+                <p>São Paulo</p>
+                <p>${postagem.data}</p>
+            </div>
+        </div>
+        <div class="conteudo">
+            <p>${postagem.conteudo}</p>
+            <img src="${postagem.arquivo}">
+        </div>
+    </div>`;
+      } else if (
+        postagem.file.includes("data:video/mp4;base64")) {
+            feed.innerHTML += `  
+            <div class="post">
             <div class="header">
                 <img src="imagens/fotoPerfil.jpeg">
                 <div class="dados">
-                    <p>${post.author}</p>
+                    <p>${postagem.usuario}</p>
                     <p>São Paulo</p>
-                    <p><time>${post.date}</time></p>
+                    <p><time>${postagem.data}</time></p>
                 </div>
             </div>
             <div class="conteudo">
-                <p>${post.content}</p>
-                <img src="">
+                <p>${postagem.conteudo}</p>
+                <video controls>
+                <source src="${postagem.arquivo}" type="video/mp4">
+               </audio>
             </div>
         </div>`;
-    })
+      } else if (
+        postagem.file.includes("data:audio/mpeg")) {
+            feed.innerHTML += `  
+            <div class="post">
+            <div class="header">
+                <img src="imagens/fotoPerfil.jpeg">
+                <div class="dados">
+                    <p>${postagem.usuario}</p>
+                    <p>São Paulo</p>
+                    <p><time>${postagem.data}</time></p>
+                </div>
+            </div>
+            <div class="conteudo">
+                <p>${postagem.conteudo}</p>
+                <audio controls>
+                <source src="${postagem.arquivo}" type="audio/mpeg">
+               </audio>
+            </div>
+        </div>`;
+      }
+    });
+  }
+
+
+
+const gCanvas = document.querySelector('#drawing-board');
+const toolbar = document.getElementById('toolbar');
+const gCtx = gCanvas.getContext('2d');
+
+
+toolbar.addEventListener('click', e => {
+    if (e.target.id === 'clear') {
+        gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
+    }
+});
+
+
+function onMouseDown(e) {
+    e.preventDefault();
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+}
+
+function onMouseMove(e) {
+    e.preventDefault();
+    gCtx.fillRect(e.offsetX - 4, e.offsetY - 4, 8, 8);
+}
+
+function onMouseUp(e) {
+    e.preventDefault();
+    window.removeEventListener('mousemove', onMouseMove);
+    window.removeEventListener('mouseup', onMouseUp);
+
+}
+
+function onSave() {
+    gCanvas.toBlob((blob) => {
+        const timestamp = Date.now().toString();
+        const a = document.createElement('a');
+        document.body.append(a);
+        a.download = `export-${timestamp}.png`;
+        a.href = URL.createObjectURL(blob);
+        a.click();
+        a.remove();
+        toolbar.style.display = 'none';
+    });
 }
 
 
-document.addEventListener("readystatechange", () => {
-    if (document.readyState == "complete") receberPostagem();
-});
+gCanvas.addEventListener('mousedown', onMouseDown);
+document.querySelector('#save').addEventListener('click', onSave);
+  
+  function logout() {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userLogado");
+    window.location.href = "/index.html";
+  }

@@ -1,23 +1,33 @@
 function cadastro() {
+    var letrasMaiscula = /[A-Z]/g;
+    var numeros = /[0-9]/g;
     var name = document.getElementById('nome');
     var email = document.getElementById('email');
     var senha = document.getElementById('senha');
     var senha2 = document.getElementById('senha2');
-    var cpf = document.getElementById('cpf');
-    var tellefone = document.getElementById('tel');
+    var tel = document.getElementById('tel');
+    
 
-    if (senha.value != senha2.value) {
-        console.log("senhas são diferentes");
-    } else {
+    if (senha.value.length < 6) {
+        alert('é necessário um mínimo de 6 caracteres')
+      } else if (senha.value != senha2.value) {
+        alert('Senhas não confere')
+      } else if (!senha.value.match(numeros)) {
+        alert('Necessário pelo menos 1 numero')
+      } else if (!senha.value.match(letrasMaiscula)) {
+        alert('Necessário uma letra maiscula')
+      }else {
         var conta = JSON.parse(localStorage.getItem('contas')) || [];
         conta.push({
             nome: name.value,
             email: email.value,
             senha: senha.value,
-            cpf: cpf.value
+            cpf: cpf.value,
+            tel: tel.value
         });
         localStorage.setItem('contas', JSON.stringify(conta));
-        console.log("funcionou");
+        alert('Conta Criada');
+        window.location.href = "login.html";
     }
 }
 
@@ -49,9 +59,7 @@ function autenticacao() {
             sessionStorage.setItem("usuarioAutenticado", JSON.stringify(contaAutenticada));
             window.location.href = "index.html";
         }else{
-            console.log("erro")
-            console.log(senha.value)
-            console.log(senha.contaAutenticada)
+            alert('Usuário ou senha Incorretos.');
         }
 
     }
