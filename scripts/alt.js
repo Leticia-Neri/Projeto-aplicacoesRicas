@@ -27,7 +27,7 @@ function cadastro() {
         });
         localStorage.setItem('contas', JSON.stringify(conta));
         alert('Conta Criada');
-        window.location.href = "login.html";
+        window.location.href = "index.html";
     }
 }
 
@@ -57,7 +57,7 @@ function autenticacao() {
             console.log("foi");
             sessionStorage.setItem("token", token);
             sessionStorage.setItem("usuarioAutenticado", JSON.stringify(contaAutenticada));
-            window.location.href = "index.html";
+            window.location.href = "posts.html";
         }else{
             alert('Usuário ou senha Incorretos.');
         }
