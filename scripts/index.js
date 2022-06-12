@@ -11,7 +11,7 @@ if (sessionStorage.getItem("token") == null) {
   
   function postagem() {
     let textoPostagem = document.getElementById("textbox");
-    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+    let posts = JSON.parse(localStorage.getItem("postagens")) || [];
     let file = document.getElementById("arquivo").files[0];
     if (textoPostagem.value <= 0) {
         alert('Você precisa digitar algo');
@@ -24,7 +24,7 @@ if (sessionStorage.getItem("token") == null) {
           conteudo: textoPostagem.value,
           arquivo: arquivoConvertido,
           data: new Date(),
-          usuario: usuarioAutenticado.nome,
+          usuario: usuarioAutenticado.nome
         };
         posts.push(post);
         localStorage.setItem("postagens", JSON.stringify(posts));
@@ -32,7 +32,6 @@ if (sessionStorage.getItem("token") == null) {
       };
     } else {
       let post = {
-        id: posts.length + 1,
         conteudo: textoPostagem.value,
         data: new Date(),
         usuario: usuarioAutenticado.nome,
@@ -47,7 +46,8 @@ if (sessionStorage.getItem("token") == null) {
     let posts = JSON.parse(localStorage.getItem("postagens")) || [];
     let feed = document.getElementById("feed");
     posts.map((postagem) => {
-      if (postagem.file == null) {
+      if (postagem.arquivo == null) {
+    
         feed.innerHTML += `  
         <div class="post">
         <div class="header">
@@ -60,11 +60,11 @@ if (sessionStorage.getItem("token") == null) {
         </div>
         <div class="conteudo">
             <p>${postagem.conteudo}</p>
-            <img src="">
         </div>
     </div>`;
-      } else if (postagem.file.includes("data:image/png;base64")) {
+      } else if (postagem.arquivo.includes("data:image/png;base64")) {
         feed.innerHTML += `  
+        
         <div class="post">
         <div class="header">
             <img src="imagens/fotoPerfil.jpeg">
@@ -80,7 +80,7 @@ if (sessionStorage.getItem("token") == null) {
         </div>
     </div>`;
       } else if (
-        postagem.file.includes("data:video/mp4;base64")) {
+        postagem.arquivo.includes("data:video/mp4;base64")) {
             feed.innerHTML += `  
             <div class="post">
             <div class="header">
@@ -88,12 +88,12 @@ if (sessionStorage.getItem("token") == null) {
                 <div class="dados">
                     <p>${postagem.usuario}</p>
                     <p>São Paulo</p>
-                    <p><time>${postagem.data}</time></p>
+                    <p>${postagem.data}</p>
                 </div>
             </div>
             <div class="conteudo">
                 <p>${postagem.conteudo}</p>
-                <video controls>
+                <video controls autoplay muted>
                 <source src="${postagem.arquivo}" type="video/mp4">
                </audio>
             </div>
@@ -107,7 +107,7 @@ if (sessionStorage.getItem("token") == null) {
                 <div class="dados">
                     <p>${postagem.usuario}</p>
                     <p>São Paulo</p>
-                    <p><time>${postagem.data}</time></p>
+                    <p>${postagem.data}</p>
                 </div>
             </div>
             <div class="conteudo">
