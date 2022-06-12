@@ -99,7 +99,7 @@ if (sessionStorage.getItem("token") == null) {
             </div>
         </div>`;
       } else if (
-        postagem.file.includes("data:audio/mpeg")) {
+        postagem.arquivo.includes("data:audio/mpeg")) {
             feed.innerHTML += `  
             <div class="post">
             <div class="header">
